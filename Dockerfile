@@ -12,5 +12,5 @@ COPY --from=frontend /app/dist /vue
 RUN pip install django
 RUN pip install djangorestframework
 RUN pip install django-cors-headers
-RUN pip install gunicorn
+
 CMD python manage.py runserver 0.0.0.0:8000
