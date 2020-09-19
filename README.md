@@ -1,33 +1,29 @@
 # m-note
 - - -
-M-note is a simple markdown notebook. The main functions are now done:
-Create, delete, edit notes
+M-note is a minimalistic notebook based on Editor.js.
 
-Authentication and user registration will be added in the future
+Frontend made on: Vue, vue-router, vuex, vue-resourse
+
+Backend made on: Django, DRF
+
+DEMO: https://m-note-mark.herokuapp.com
 - - -
 
-## back
-1. create venv
+## Starting
+### Backend
 ```
-python -m venv venv
-```
-2. ```pip install requirements.txt```
-3. Go to folder
-```
-cd m-note
-cd backend
-```
-4. migrate
-```
-python manage.py makemigrations
-python manage.py migrate
+cd backend 
 python manage.py runserver
 ```
-
-## front
+### Frontend
 ```
-cd m-note
 cd frontend
+cd m-note
 npm install
-npm run build
+npm run serve
+```
+### docker run
+```
+docker-compose build
+docker-compose up
 ```
