@@ -1,6 +1,5 @@
 from django.contrib import admin
 from django.urls import path, include, re_path
-from django.views.decorators.csrf import csrf_exempt
 from django.views.static import serve as _serve
 
 def serve(request, path):
@@ -11,5 +10,7 @@ def serve(request, path):
 urlpatterns = [
     path('api/', include('notes.urls')),
     path('admin/', admin.site.urls),
-    re_path(r'(?P<path>(^/?$|.*\.(js|css)))', serve)
+    re_path(r'(?P<path>(^/?$|.*\.(js|css)))', serve),
+    re_path(r'(?P<path>(^login/?$|.*\.(js|css)))', serve),
+    re_path(r'(?P<path>(^registration/?$|.*\.(js|css)))', serve)
 ]
