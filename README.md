@@ -9,13 +9,13 @@ Backend made on: Django, DRF
 DEMO: https://m-note-mark.herokuapp.com
 - - -
 
-## starting
-### backend
+## Starting
+### Backend
 ```
 cd backend 
 python manage.py runserver
 ```
-###frontend
+### Frontend
 ```
 cd frontend
 cd m-note
