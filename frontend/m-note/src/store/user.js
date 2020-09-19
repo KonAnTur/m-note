@@ -1,5 +1,8 @@
 import Vue from 'vue'
 import VueResource from 'vue-resource'
+
+import { apiHost } from '../config.js'
+
 Vue.use(VueResource)
 
 export default {
@@ -30,7 +33,7 @@ export default {
             commit('setLoading', true)
             try {
                 //const user = 
-                await Vue.http.post('/api/users/', {username, email, password})
+                await Vue.http.post(apiHost + '/api/users/', {username, email, password})
                 commit('setLoading', false)
             } catch(error) {
                 commit('setLoading', false)
@@ -42,7 +45,7 @@ export default {
             commit('clearError')
             commit('setLoading', true)
             try {
-                const user = await Vue.http.post('/api/login/', {username, email, password})
+                const user = await Vue.http.post(apiHost + '/api/login/', {username, email, password})
                 commit('tokenUser', user.body.token)
                 commit('setLoading', false)
             } catch(error) {

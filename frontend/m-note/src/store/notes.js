@@ -2,6 +2,8 @@ import Vue from 'vue'
 import VueResource from 'vue-resource'
 Vue.use(VueResource)
 
+import { apiHost } from '../config.js'
+
 export default {
     state: {
         notes: [],
@@ -35,7 +37,7 @@ export default {
     actions: {
         async viewNotes({commit}){
             try {
-                const notes = await Vue.http.get('/api/notes/')
+                const notes = await Vue.http.get(apiHost + '/api/notes/')
                 commit('viewNotes', notes.body)
             } catch(error) {
                 console.log(error)
@@ -44,7 +46,7 @@ export default {
         },
         async saveNote({commit}, note){
             try {
-                await Vue.http.put('/api/notes/' + note.id + '/', note)
+                await Vue.http.put(apiHost + '/api/notes/' + note.id + '/', note)
                 commit('saveNote', note)
             } catch(error) {
                 console.log(error)
@@ -53,7 +55,7 @@ export default {
         },
         async createNote({commit}, note){
             try {
-                const newNote = await Vue.http.post('/api/notes/', note)
+                const newNote = await Vue.http.post(apiHost + '/api/notes/', note)
                 console.log(newNote)
                 commit('createNote', newNote.body)
             } catch(error) {
@@ -63,7 +65,7 @@ export default {
         },
         async deleteNote({commit}, id){
             try {
-                await Vue.http.delete('/api/notes/' + id + '/')
+                await Vue.http.delete(apiHost + '/api/notes/' + id + '/')
                 commit('deleteNote', id)
             } catch(error) {
                 console.log(error)
