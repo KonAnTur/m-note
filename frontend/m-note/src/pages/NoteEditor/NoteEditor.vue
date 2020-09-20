@@ -120,10 +120,13 @@ export default {
     },
     deliteNote(id) {
       this.$store.dispatch('deleteNote', id)
-      this.overlay = true
-      this.drawer = true
-      this.initData = {time: 1554508385558, blocks: [], version: "2.12.3"}
-      this.noteTitle = 'Please select a note.'
+      if(id === this.noteId) {
+        this.overlay = true
+        this.drawer = true
+        this.initData = {time: 1554508385558, blocks: [], version: "2.12.3"}
+        this.noteTitle = 'Please select a note.'
+        this.noteId = null
+      }
     },
     showNoteTitle(title){
       if(title){
