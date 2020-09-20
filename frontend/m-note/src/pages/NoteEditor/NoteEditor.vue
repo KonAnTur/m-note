@@ -15,16 +15,20 @@
 
       <v-divider></v-divider>
 
-      <v-list dense>
+      <v-list dense nav>
         <v-list-item 
           link
           v-for="note in notes"
           :key="note.id"
-          @click="noteShow(note.id)"
         >
-          <v-list-item-content>
+          <v-list-item-content @click="noteShow(note.id)">
             <v-list-item-title>{{ showNoteTitle(note.title) }}</v-list-item-title>
           </v-list-item-content>
+          <v-list-item-action>
+            <v-btn tile icon color="indigo" class="delete-btn" @click="deliteNote(note.id)">
+              <v-icon>mdi-delete-forever</v-icon>
+            </v-btn>
+          </v-list-item-action>
         </v-list-item>
       </v-list>
     </v-navigation-drawer>
@@ -33,16 +37,12 @@
       <div class="menu-btn" fixed>
         <v-speed-dial fixed class="btn-group">
           <template v-slot:activator>
-            <v-btn icon color="pink" @click="drawer = !drawer">
+            <v-btn tile icon color="indigo" class="crud-btn" @click="drawer = !drawer">
               <v-icon>mdi-menu</v-icon>
             </v-btn>
             <v-spacer></v-spacer>
-            <v-btn icon color="indigo" @click="createNote">
+            <v-btn tile icon color="indigo" class="crud-btn" @click="createNote">
               <v-icon>mdi-plus</v-icon>
-            </v-btn>
-            <v-spacer></v-spacer>
-            <v-btn icon color="indigo" @click="deliteNote">
-              <v-icon>mdi-delete-forever</v-icon>
             </v-btn>
           </template>
         </v-speed-dial>
@@ -118,8 +118,8 @@ export default {
       }
       this.$store.dispatch('createNote', note)
     },
-    deliteNote() {
-      this.$store.dispatch('deleteNote', this.noteId)
+    deliteNote(id) {
+      this.$store.dispatch('deleteNote', id)
       this.overlay = true
       this.drawer = true
       this.initData = {time: 1554508385558, blocks: [], version: "2.12.3"}
@@ -160,5 +160,15 @@ v-text-field{
 }
 .note-title{
   font-size: 2.2em;
+}
+.crud-btn{
+  border-radius: 4px;
+  margin-top: 2px;
+}
+.delete-btn{
+  border-radius: 4px;
+}
+.v-list-item{
+  max-height: 40px;
 }
 </style>
