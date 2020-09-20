@@ -171,4 +171,9 @@ v-text-field{
 .v-list-item{
   max-height: 40px;
 }
+button, 
+button:active, 
+button:focus {
+    outline: none;
+}
 </style>
