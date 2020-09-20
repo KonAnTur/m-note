@@ -4,7 +4,7 @@
       <v-list-item>
         <v-list-item-content>
           <v-list-item-title class="title">
-            <!--Konstantin Turov-->
+            {{ userName }}
           </v-list-item-title>
           <v-list-item-subtitle>
             <button @click="logout">logout</button>
@@ -25,9 +25,7 @@
             <v-list-item-title>{{ showNoteTitle(note.title) }}</v-list-item-title>
           </v-list-item-content>
           <v-list-item-action>
-            <v-btn tile icon color="indigo" class="delete-btn" @click="deliteNote(note.id)">
-              <v-icon>mdi-delete-forever</v-icon>
-            </v-btn>
+            <delete-note-button :deleteNoteId="note.id" @deleted-note="deletedNote($event)"></delete-note-button>
           </v-list-item-action>
         </v-list-item>
       </v-list>
@@ -66,6 +64,8 @@
 </template>
 
 <script>
+import DeleteNoteButton from './DeleteNoteButton.vue'
+
 export default {
   data() {
     return {
@@ -84,6 +84,9 @@ export default {
     notes() {
       return this.$store.getters.notes
     },
+    userName() {
+      return this.$store.getters.userName
+    }
   },
   methods: {
     save() {
@@ -118,9 +121,8 @@ export default {
       }
       this.$store.dispatch('createNote', note)
     },
-    deliteNote(id) {
-      this.$store.dispatch('deleteNote', id)
-      if(id === this.noteId) {
+    deletedNote(deletedId) {
+      if(deletedId === this.noteId) {
         this.overlay = true
         this.drawer = true
         this.initData = {time: 1554508385558, blocks: [], version: "2.12.3"}
@@ -141,6 +143,9 @@ export default {
           this.$router.push('/login')
       })
     }
+  },
+  components: {
+    'delete-note-button': DeleteNoteButton
   },
   created() {
     this.$store.dispatch('viewNotes')

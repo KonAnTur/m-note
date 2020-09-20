@@ -7,11 +7,15 @@ Vue.use(VueResource)
 
 export default {
     state: {
-        token: localStorage.getItem('Authorization') || null
+        token: localStorage.getItem('Authorization') || null,
+        username: localStorage.getItem('UserName') || null
     },
     getters: {
-        isUserLoggedIn (state) {
+        isUserLoggedIn(state) {
             return state.token !== null
+        },
+        userName(state) {
+            return state.username
         }
     },
     mutations: {
@@ -22,9 +26,16 @@ export default {
                 request.headers.set('Authorization', 'Token ' + token)
             })
         },
-        deleteTokenUser(state){
+        nameUser(state, username) {
+            localStorage.setItem('UserName', username);
+            console.log(username)
+            state.username = localStorage.getItem('UserName') || null
+        },
+        deleteTokenAndUser(state){
             localStorage.removeItem('Authorization')
+            localStorage.removeItem('UserName')
             state.token = null
+            state.username = null
         }
     },
     actions: {
@@ -47,9 +58,11 @@ export default {
             try {
                 const user = await Vue.http.post(apiHost + '/api/login/', {username, email, password})
                 commit('tokenUser', user.body.token)
+                commit('nameUser', username)
                 commit('setLoading', false)
             } catch(error) {
                 localStorage.removeItem('Authorization')
+                localStorage.removeItem('UserName')
                 commit('setLoading', false)
                 commit('setError', error.message)
                 throw error
@@ -59,7 +72,7 @@ export default {
             commit('tokenUser', token)
         },
         logoutUser({commit}) {
-            commit('deleteTokenUser')
+            commit('deleteTokenAndUser')
         }
     }
 }
