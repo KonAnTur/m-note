@@ -11,8 +11,15 @@ DEMO: https://m-note-mark.herokuapp.com
 
 ## Starting
 ### Backend
+First you need to make a virtual environment and install the necessary Python libraries there.
 ```
-cd backend 
+python -m venv venv
+venv\Script\activate
+cd backend
+pip install requirements.txt
+```
+Then you can start the server
+```
 python manage.py runserver
 ```
 ### Frontend
