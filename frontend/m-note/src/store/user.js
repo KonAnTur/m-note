@@ -21,14 +21,15 @@ export default {
     mutations: {
         tokenUser(state, token){
             localStorage.setItem('Authorization', token);
-            state.token = localStorage.getItem('Authorization') || null
+            state.token = localStorage.getItem('Authorization') || null  
             Vue.http.interceptors.push(request => {
-                request.headers.set('Authorization', 'Token ' + token)
+                if(state.token !== null) {
+                    request.headers.set('Authorization', 'Token ' + state.token)
+                }
             })
         },
         nameUser(state, username) {
             localStorage.setItem('UserName', username);
-            console.log(username)
             state.username = localStorage.getItem('UserName') || null
         },
         deleteTokenAndUser(state){
@@ -43,7 +44,6 @@ export default {
             commit('clearError')
             commit('setLoading', true)
             try {
-                //const user = 
                 await Vue.http.post(apiHost + '/api/users/', {username, email, password})
                 commit('setLoading', false)
             } catch(error) {
@@ -69,6 +69,7 @@ export default {
             }
         },
         autoLoginUser ({commit}, token) {
+            console.log('auto: ', token)
             commit('tokenUser', token)
         },
         logoutUser({commit}) {
