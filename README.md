@@ -1,6 +1,6 @@
 # m-note
 - - -
-M-note is a minimalistic notebook based on Editor.js.
+M-note is a minimalistic notebook based on <a href="https://github.com/codex-team/editor.js">Editor.js</a>.
 
 Frontend made on: Vue, vue-router, vuex, vue-resourse
 
