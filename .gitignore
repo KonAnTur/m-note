@@ -58,6 +58,7 @@ coverage.xml
 # Django stuff:
 *.log
 local_settings.py
+*.sqlite3
 db.sqlite3-journal
 
 # Flask stuff:
@@ -179,3 +180,5 @@ yarn-error.log*
 
 /frontend/m-note/node_modules/
 /backend/venv
+backend/db.sqlite3
+
