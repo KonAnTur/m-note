@@ -25,14 +25,6 @@
                                     ></v-text-field>
 
                                     <v-text-field
-                                        label="Email"
-                                        name="email"
-                                        type="text"
-                                        :rules="emailRules"
-                                        v-model="email"
-                                    ></v-text-field>
-
-                                    <v-text-field
                                         label="Password"
                                         name="password"
                                         type="password"
@@ -66,14 +58,9 @@
     data(){
         return {
             username: '',
-            email: '',
             password: '',
             valid: false,
             usernameRules: [v => !!v || 'Username is required',],
-            emailRules: [
-                v => !!v || 'E-mail is required',
-                v => /.+@.+\..+/.test(v) || 'E-mail must be valid',
-            ],
             passwordLength: 6,
             passwordRules: [
                 v => !!v || 'Password is required',

@@ -5,7 +5,8 @@
             icon 
             color="indigo" 
             :class="isActive ? 'red' : 'default'" 
-            class="btn-del" 
+            class="btn-del"
+            active-class="no-active"
             @click="deleteNote()"
         >
             <v-icon>mdi-delete-forever</v-icon>
@@ -50,5 +51,8 @@ export default {
 }
 .btn-del{
     border-radius: 4px;
+}
+.v-btn--active.no-active::before {                                                                             
+  opacity: 0 !important;
 }
 </style>

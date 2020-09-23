@@ -17,9 +17,9 @@
 
       <v-list dense nav>
         <v-list-item 
-          link
           v-for="note in notes"
           :key="note.id"
+          class="link-note"
         >
           <v-list-item-content @click="noteShow(note.id)">
             <v-list-item-title>{{ showNoteTitle(note.title) }}</v-list-item-title>
@@ -45,7 +45,7 @@
           </template>
         </v-speed-dial>
       </div>
-      <v-col cols="12" sm="6" class="col-in">
+      <v-col cols="10" xs="2" sm="6" class="col-in">
         <v-text-field
           class="note-title"
           v-model="noteTitle"
@@ -54,7 +54,9 @@
           single-line
         ></v-text-field>
       </v-col>
-      <editor autofocus header list code inlineCode embed marker table raw delimiter quote paragraph checklist ref="editor" holder-id="codex-editor" :init-data="initData" @save="save" @ready="onReady" @change="onChange" />
+      <v-col cols="12" class="col-in">
+        <editor autofocus header list code inlineCode embed marker table raw delimiter quote paragraph checklist ref="editor" holder-id="codex-editor" :init-data="initData" @save="save" @ready="onReady" @change="onChange" />
+      </v-col>
       <div class="text-center">
         <v-overlay :value="overlay" z-index="5">
         </v-overlay>
@@ -183,5 +185,11 @@ button,
 button:active, 
 button:focus {
     outline: none;
+}
+.link-note{
+  cursor:	pointer;
+}
+.link-note:hover{
+  background:#f0f5f8;
 }
 </style>
