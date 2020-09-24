@@ -1,16 +1,11 @@
 <template>
     <div>
-        <v-btn 
-            tile 
-            icon 
-            color="indigo" 
-            :class="isActive ? 'red' : 'default'" 
-            class="btn-del"
-            active-class="no-active"
+        <button 
+            class="btn-del2" 
             @click="deleteNote()"
         >
-            <v-icon>mdi-delete-forever</v-icon>
-        </v-btn>
+            <v-icon :class="isActive ? 'red' : 'default'" >mdi-delete-forever</v-icon>
+        </button>
     </div>
 </template>
 
@@ -41,18 +36,24 @@ export default {
 <style scoped>
 .default{
     color: rgba(0, 0, 0, 0.54) !important;
-
 }
 .red{
     color: red !important;
-    background-color:#e9e9e9;
-    transition: color 0.2s;
-    transition: background-color 0.2s;
 }
 .btn-del{
     border-radius: 4px;
 }
-.v-btn--active.no-active::before {                                                                             
-  opacity: 0 !important;
+.btn-del2{
+    border-radius: 4px;
+    height: 35px;
+    width: 35px;
+}
+.btn-del2:hover{
+    background-color:#e9e9e9;
+}
+button, 
+button:active, 
+button:focus {
+    outline: none;
 }
 </style>
