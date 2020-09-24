@@ -69,7 +69,6 @@ export default {
             }
         },
         autoLoginUser ({commit}, token) {
-            console.log('auto: ', token)
             commit('tokenUser', token)
         },
         logoutUser({commit}) {

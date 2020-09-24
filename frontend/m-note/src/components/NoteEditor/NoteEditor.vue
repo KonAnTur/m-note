@@ -47,15 +47,16 @@
       </div>
       <v-col cols="10" xs="2" sm="6" class="col-in">
         <v-text-field
+          v-if="!overlay"
           class="note-title"
           v-model="noteTitle"
-          label="Untitled"
+          placeholder="Untitled"
           @change="onChange"
           single-line
         ></v-text-field>
       </v-col>
       <v-col cols="12" class="col-in">
-        <editor autofocus header list code inlineCode embed marker table raw delimiter quote paragraph checklist ref="editor" holder-id="codex-editor" :init-data="initData" @save="save" @ready="onReady" @change="onChange" />
+        <editor v-if="!overlay" autofocus header list code inlineCode embed marker table raw delimiter quote paragraph checklist ref="editor" holder-id="codex-editor" :init-data="initData" @save="save" @ready="onReady" @change="onChange" />
       </v-col>
       <div class="text-center">
         <v-overlay :value="overlay" z-index="5">
@@ -74,12 +75,8 @@ export default {
       drawer: true,
       overlay: true,
       noteId: null,
-      noteTitle: 'Please select a note.',
-      initData: {
-        time: 1554508385558,
-        blocks: [],
-        version: "2.12.3"
-      }
+      noteTitle: null,
+      initData: {}
     };
   },
   computed: {
@@ -111,7 +108,7 @@ export default {
     noteShow(id) {
       const noteById = this.$store.getters.noteById(id)
       this.initData = JSON.parse(noteById.body)
-      this.noteId = id
+      this.noteId = noteById.id
       this.noteTitle = noteById.title
       this.overlay = false
       this.drawer = false
@@ -151,7 +148,7 @@ export default {
   },
   created() {
     this.$store.dispatch('viewNotes')
-  }
+  },
 };
 </script>
 
