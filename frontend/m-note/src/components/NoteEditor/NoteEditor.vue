@@ -119,6 +119,12 @@ export default {
         body: JSON.stringify({time: 1554508385558, blocks: [],version: "2.12.3"})
       }
       this.$store.dispatch('createNote', note)
+        .then(() => {})
+        .catch(() => {
+          setTimeout(() => {
+            this.$store.dispatch('clearError')
+          }, 4000)
+        })
     },
     deletedNote(deletedId) {
       if(deletedId === this.noteId) {
@@ -140,6 +146,11 @@ export default {
       this.$store.dispatch('logoutUser')
         .then(() => {
           this.$router.push('/login')
+        .catch(() => {
+          setTimeout(() => {
+            this.$store.dispatch('clearError')
+          }, 4000)
+        })
       })
     }
   },

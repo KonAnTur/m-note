@@ -116,7 +116,11 @@ export default {
                                 this.$router.push('/')
                             })
                     })
-                    .catch(error => console.log(error.message))
+                    .catch(() => {
+                        setTimeout(() => {
+                            this.$store.dispatch('clearError')
+                        }, 4000)
+                    })
             }
         }
     }

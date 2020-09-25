@@ -48,7 +48,7 @@ export default {
                 commit('setLoading', false)
             } catch(error) {
                 commit('setLoading', false)
-                commit('setError', error.message)
+                commit('setError', error.body.error)
                 throw error
             }
         },
@@ -64,7 +64,7 @@ export default {
                 localStorage.removeItem('Authorization')
                 localStorage.removeItem('UserName')
                 commit('setLoading', false)
-                commit('setError', error.message)
+                commit('setError', error.body.error)
                 throw error
             }
         },
