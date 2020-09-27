@@ -49,7 +49,13 @@ export default {
                 commit('setLoading', false)
             } catch(error) {
                 commit('setLoading', false)
-                commit('setError', error.body.error)
+                if(error.body.email) {
+                    commit('setError', error.body.email[0])
+                } else if(error.body.username) {
+                    commit('setError', error.body.username[0])
+                } else if(error.body) {
+                    commit('setError', error.body)
+                }
                 throw error
             }
         },
