@@ -1,12 +1,11 @@
 <template>
     <v-list-item 
-        class="link-note"
         v-click-outside="onClickOutside"
     >
         <v-list-item-content>
             <v-list-item-title>
                 <v-expand-x-transition>
-                    <v-text-field v-model="titleNote" v-show="isActive"></v-text-field>
+                    <v-text-field class="note-title" v-model="titleNote" v-show="isActive"></v-text-field>
                 </v-expand-x-transition>
             </v-list-item-title>
         </v-list-item-content>
@@ -70,12 +69,12 @@ export default {
     height: 35px;
     width: 35px;
 }
-.btn-create:hover{
-    background-color:#e9e9e9;
-}
 button, 
 button:active, 
 button:focus {
     outline: none;
+}
+.note-title{
+    font-size: 0.8125rem
 }
 </style>
