@@ -35,6 +35,7 @@ export default {
         deleteTokenAndUser(state){
             localStorage.removeItem('Authorization')
             localStorage.removeItem('UserName')
+            localStorage.removeItem('startNote')
             state.token = null
             state.username = null
         }
