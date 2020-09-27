@@ -3,49 +3,37 @@
         <v-main>
             <v-container class="fill-height" fluid>
                 <v-row align="center" justify="center">
-                    <v-col cols="12" sm="8" md="6">
-                        <v-card class="elevation-12">
-                            <v-toolbar color="shades" dark flat>
-                                <v-toolbar-title>Login</v-toolbar-title>
-                                <v-spacer></v-spacer>
-                                <v-toolbar-title>
-                                    <router-link tag="a" to="/registration" class="reg-link">
-                                        Registration
-                                    </router-link>
-                                </v-toolbar-title>
-                            </v-toolbar>
-                            <v-card-text>
-                                <v-form ref="form" v-model="valid" validation>
-                                    <v-text-field
-                                        label="Username"
-                                        name="username"
-                                        type="text"
-                                        :rules="usernameRules"
-                                        v-model="username"
-                                    ></v-text-field>
+                    <v-col cols="12" sm="8" md="4">
+                        <h2>Login</h2>
 
-                                    <v-text-field
-                                        label="Password"
-                                        name="password"
-                                        type="password"
-                                        :counter="passwordLength"
-                                        :rules="passwordRules"
-                                        v-model="password"
-                                    ></v-text-field>
-                                </v-form>
-                            </v-card-text>
-                            <v-card-actions>
-                                <v-spacer></v-spacer>
-                                <v-btn 
-                                    color="shades"
-                                    :loading="loading" 
-                                    :disabled="!valid || loading" 
-                                    @click="onSubmit"
-                                >
-                                    Login
-                                </v-btn>
-                            </v-card-actions>
-                        </v-card>
+                        <router-link tag="a" to="/registration" class="reg-link">
+                            Registration
+                        </router-link>
+                        <v-form ref="form" v-model="valid" validation>
+                            <v-text-field
+                                label="Username"
+                                name="username"
+                                type="text"
+                                :rules="usernameRules"
+                                v-model="username"
+                            ></v-text-field>
+                            <v-text-field
+                                label="Password"
+                                name="password"
+                                type="password"
+                                :counter="passwordLength"
+                                :rules="passwordRules"
+                                v-model="password"
+                            ></v-text-field>
+                        </v-form>
+                        <v-btn 
+                            color="shades"
+                            :loading="loading" 
+                            :disabled="!valid || loading" 
+                            @click="onSubmit"
+                        >
+                            Login
+                        </v-btn>
                     </v-col>
                 </v-row>
             </v-container>
