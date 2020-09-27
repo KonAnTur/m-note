@@ -28,6 +28,7 @@
             <delete-note-button :deleteNoteId="note.id" @deleted-note="deletedNote($event)"></delete-note-button>
           </v-list-item-action>
         </v-list-item>
+        <create-note-button></create-note-button>
       </v-list>
     </v-navigation-drawer>
 
@@ -35,13 +36,16 @@
       <div class="menu-btn" fixed>
         <v-speed-dial fixed class="btn-group">
           <template v-slot:activator>
-            <v-btn tile icon color="indigo" class="crud-btn" @click="drawer = !drawer">
+            <v-btn 
+              tile 
+              icon 
+              color="indigo" 
+              class="crud-btn" 
+              @click="drawer = !drawer" 
+            >
               <v-icon>mdi-menu</v-icon>
             </v-btn>
             <v-spacer></v-spacer>
-            <v-btn tile icon color="indigo" class="crud-btn" @click="createNote">
-              <v-icon>mdi-plus</v-icon>
-            </v-btn>
           </template>
         </v-speed-dial>
       </div>
@@ -68,6 +72,7 @@
 
 <script>
 import DeleteNoteButton from './DeleteNoteButton.vue'
+import CreateNote from './CreateNote.vue'
 
 export default {
   data() {
@@ -113,19 +118,6 @@ export default {
       this.overlay = false
       this.drawer = false
     },
-    createNote() {
-      const note = {
-        title: '',
-        body: JSON.stringify({time: 1554508385558, blocks: [],version: "2.12.3"})
-      }
-      this.$store.dispatch('createNote', note)
-        .then(() => {})
-        .catch(() => {
-          setTimeout(() => {
-            this.$store.dispatch('clearError')
-          }, 4000)
-        })
-    },
     deletedNote(deletedId) {
       if(deletedId === this.noteId) {
         this.overlay = true
@@ -155,7 +147,8 @@ export default {
     }
   },
   components: {
-    'delete-note-button': DeleteNoteButton
+    'delete-note-button': DeleteNoteButton,
+    'create-note-button': CreateNote
   },
   created() {
     this.$store.dispatch('viewNotes')

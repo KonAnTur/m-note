@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import VueResource from 'vue-resource'
+import vClickOutside from 'v-click-outside'
 
 import App from './App.vue'
 import vuetify from './plugins/vuetify';
@@ -11,7 +12,8 @@ import Editor from 'vue-editor-js'
  
 Vue.use(Editor)
 Vue.use(VueRouter)
-Vue.use(VueResource);
+Vue.use(VueResource)
+Vue.use(vClickOutside)
 
 Vue.config.productionTip = false
 
