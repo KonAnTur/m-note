@@ -76,13 +76,24 @@ import CreateNote from './CreateNote.vue'
 
 export default {
   data() {
-    return {
-      drawer: true,
-      overlay: true,
-      noteId: null,
-      noteTitle: null,
-      initData: {}
-    };
+    const startNote = JSON.parse(localStorage.getItem('startNote'))
+    if(startNote) {
+      return {
+        drawer: false,
+        overlay: false,
+        noteId: startNote.id,
+        noteTitle: startNote.title,
+        initData: JSON.parse(startNote.body)
+      }
+    } else {
+      return {
+        drawer: true,
+        overlay: true,
+        noteId: null,
+        noteTitle: null,
+        initData: {}
+      }
+    }
   },
   computed: {
     notes() {
@@ -107,11 +118,13 @@ export default {
             id: this.noteId,
             title: this.noteTitle
           }
+          localStorage.setItem('startNote', JSON.stringify(note))
           this.$store.dispatch('saveNote', note)
         })
     },
     noteShow(id) {
       const noteById = this.$store.getters.noteById(id)
+      localStorage.setItem('startNote', JSON.stringify(noteById))
       this.initData = JSON.parse(noteById.body)
       this.noteId = noteById.id
       this.noteTitle = noteById.title
@@ -120,6 +133,7 @@ export default {
     },
     deletedNote(deletedId) {
       if(deletedId === this.noteId) {
+        localStorage.removeItem('startNote')
         this.overlay = true
         this.drawer = true
         this.initData = {time: 1554508385558, blocks: [], version: "2.12.3"}

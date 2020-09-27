@@ -20,7 +20,7 @@ export default {
     },
     mutations: {
         tokenUser(state, token){
-            localStorage.setItem('Authorization', token);
+            localStorage.setItem('Authorization', token)
             state.token = localStorage.getItem('Authorization') || null  
             Vue.http.interceptors.push(request => {
                 if(state.token !== null) {
