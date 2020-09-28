@@ -12,6 +12,8 @@ DEMO: https://m-note-mark.herokuapp.com
 ## Starting
 ### Backend
 First you need to make a virtual environment and install the necessary Python libraries there.
+
+You need to create a database and configure it in settings.py
 ```
 python -m venv venv
 venv\Script\activate
@@ -31,6 +33,19 @@ npm run serve
 ```
 ### docker run
 ```
+#settings.py
+'default': {
+    'ENGINE': 'django.db.backends.postgresql',
+    'NAME': 'postgres',
+    'USER': 'postgres',
+    'PASSWORD': 'postgres',
+    'HOST': 'db',
+    'PORT': '5432'
+}
+```
+```
 docker-compose build
+docker-compose run app python manage.py makemigrations
+docker-compose run app python manage.py migrate
 docker-compose up
 ```

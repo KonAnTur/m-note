@@ -66,10 +66,22 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'm_note.wsgi.application'
 
-DATABASES = {
+DATABASES = { 
+    #'default': {
+    #    'ENGINE': 'django.db.backends.postgresql',
+    #    'NAME': 'postgres',
+    #    'USER': 'postgres',
+    #    'PASSWORD': 'postgres',
+    #    'HOST': 'db',
+    #    'PORT': '5432'
+    #}
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'm-note',
+        'USER': 'postgres',
+        'PASSWORD': '1322',
+        'HOST': '127.0.0.1',
+        'PORT': '5432'
     }
 }
 
