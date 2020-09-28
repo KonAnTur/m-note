@@ -2,9 +2,11 @@
 - - -
 M-note is a minimalistic notebook based on <a href="https://github.com/codex-team/editor.js">Editor.js</a>.
 
-Frontend made on: Vue, vue-router, vuex, vue-resourse
+Frontend made on: vue.js, vue-router, vuex, vue-resourse
 
-Backend made on: Django, DRF
+Data Base: PostgreSQL
+
+Backend made on: Django, Django REST framework
 
 DEMO: https://m-note-mark.herokuapp.com
 - - -
