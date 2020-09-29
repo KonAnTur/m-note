@@ -1,7 +1,4 @@
 from django.db import models
-from django.contrib.auth.models import User
-
-User._meta.get_field('email')._unique = True
 
 class Notes(models.Model):
     title = models.CharField(max_length=140, blank=True, default='')

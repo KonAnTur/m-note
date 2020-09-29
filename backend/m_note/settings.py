@@ -31,6 +31,7 @@ INSTALLED_APPS = [
     'rest_framework.authtoken',
     'corsheaders',
 
+    'user',
     'notes',
 ]
 
@@ -100,7 +101,7 @@ AUTH_PASSWORD_VALIDATORS = [
 ]
 
 AUTHENTICATION_BACKENDS = (
-    'notes.email_name_auth.EmailBackend',
+    'user.email_name_auth.EmailBackend',
 )
 
 LANGUAGE_CODE = 'en-us'

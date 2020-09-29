@@ -1,42 +1,15 @@
-from rest_framework import status
-from rest_framework.decorators import api_view
-from rest_framework.response import Response
-from rest_framework import generics, permissions
-from rest_framework.views import APIView
-from django.contrib.auth import authenticate
+from django.http import Http404
 
-from re import *
+from rest_framework import status, permissions
+from rest_framework.views import APIView
+from rest_framework.response import Response
 
 from .models import Notes
-from .serializers import NotesSerializer, UserSerializer
-
-class UserCreate(generics.CreateAPIView):
-    authentication_classes = []
-    permission_classes = []
-    serializer_class = UserSerializer
-
-class LoginView(APIView):
-    permission_classes = []
-
-    def post(self, request,):
-        username = request.data.get("username")
-        password = request.data.get("password")
-        user = authenticate(username=username, password=password)
-        pattern_email = compile('(^|\s)[-a-z0-9_.]+@([-a-z0-9]+\.)+[a-z]{2,6}(\s|$)')
-        is_valid_email = pattern_email.match(username)
-        
-        if user:
-            return Response(
-                {
-                    "token": user.auth_token.key,
-                    "username": user.username
-                }
-            )
-        else:
-            return Response({"error": "Wrong Credentials"}, status=status.HTTP_400_BAD_REQUEST)
+from .serializers import NotesSerializer
 
 class NoteList(APIView):
     permission_classes = [permissions.IsAuthenticated]
+
     def get(self, request, format=None):
         notes = Notes.objects.filter(author=request.user)
         serializer = NotesSerializer(notes, many=True)
@@ -53,11 +26,12 @@ class NoteList(APIView):
 
 class NotesDetail(APIView):
     permission_classes = [permissions.IsAuthenticated]
+
     def get_object(self, pk):
         try:
             return Notes.objects.get(pk=pk)
         except Notes.DoesNotExist:
-            raise Http404
+            raise Http404('No such note found')
 
     def get(self, request, pk, format=None):
         note = self.get_object(pk)

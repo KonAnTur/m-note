@@ -10,6 +10,8 @@ def serve(request, path):
 
 urlpatterns = [
     path('api/', include('notes.urls')),
+    path('api/', include('user.urls')),
+    
     path('admin/', admin.site.urls),
 
     re_path(r'(?P<path>(^/?$|.*\.(js|css)))', serve),
