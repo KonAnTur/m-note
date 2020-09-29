@@ -22,20 +22,16 @@ class LoginView(APIView):
         username = request.data.get("username")
         password = request.data.get("password")
         user = authenticate(username=username, password=password)
-
         pattern_email = compile('(^|\s)[-a-z0-9_.]+@([-a-z0-9]+\.)+[a-z]{2,6}(\s|$)')
         is_valid_email = pattern_email.match(username)
-
+        
         if user:
-            if is_valid_email:
-                return Response(
-                    {
-                        "token": user.auth_token.key,
-                        "username": user.username
-                    }
-                )
-            else:
-                return Response({"token": user.auth_token.key})
+            return Response(
+                {
+                    "token": user.auth_token.key,
+                    "username": user.username
+                }
+            )
         else:
             return Response({"error": "Wrong Credentials"}, status=status.HTTP_400_BAD_REQUEST)
 
