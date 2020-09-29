@@ -11,7 +11,7 @@
                         </router-link>
                         <v-form ref="form" v-model="valid" validation>
                             <v-text-field
-                                label="Username"
+                                label="Username or email"
                                 name="username"
                                 type="text"
                                 :rules="usernameRules"
@@ -30,7 +30,7 @@
                             color="shades"
                             :loading="loading" 
                             :disabled="!valid || loading" 
-                            @click="onSubmit"
+                            @click="login"
                         >
                             Login
                         </v-btn>
@@ -48,7 +48,9 @@
             username: '',
             password: '',
             valid: false,
-            usernameRules: [v => !!v || 'Username is required',],
+            usernameRules: [
+                v => !!v || 'Username or email is required',
+            ],
             passwordLength: 6,
             passwordRules: [
                 v => !!v || 'Password is required',
@@ -62,7 +64,7 @@
         }
     },
     methods: {
-        onSubmit(){
+        login(){
             if (this.$refs.form.validate()) {
                 const user = {
                     username: this.username,

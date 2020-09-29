@@ -65,7 +65,11 @@ export default {
             try {
                 const user = await Vue.http.post(apiHost + '/api/login/', {username, email, password})
                 commit('tokenUser', user.body.token)
-                commit('nameUser', username)
+                if(user.body.username) {
+                    commit('nameUser', user.body.username)
+                } else {
+                    commit('nameUser', username)
+                }
                 commit('setLoading', false)
             } catch(error) {
                 localStorage.removeItem('Authorization')
