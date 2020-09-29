@@ -45,7 +45,7 @@ export default {
             commit('clearError')
             commit('setLoading', true)
             try {
-                await Vue.http.post(apiHost + '/api/users/', {username, email, password})
+                await Vue.http.post(apiHost + '/api/users/registration/', {username, email, password})
                 commit('setLoading', false)
             } catch(error) {
                 commit('setLoading', false)
@@ -63,7 +63,8 @@ export default {
             commit('clearError')
             commit('setLoading', true)
             try {
-                const user = await Vue.http.post(apiHost + '/api/login/', {username, email, password})
+                const user = await Vue.http.post(apiHost + '/api/users/authorization/', 
+                                                           {username, email, password})
                 commit('tokenUser', user.body.token)
                 commit('nameUser', user.body.username)
                 commit('setLoading', false)

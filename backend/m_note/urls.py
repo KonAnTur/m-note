@@ -9,8 +9,8 @@ def serve(request, path):
     return _serve(request, path, "/vue")
 
 urlpatterns = [
-    path('api/', include('notes.urls')),
-    path('api/', include('user.urls')),
+    path('api/notes/', include('notes.urls')),
+    path('api/users/', include('user.urls')),
     
     path('admin/', admin.site.urls),
 
