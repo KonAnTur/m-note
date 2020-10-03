@@ -1,12 +1,10 @@
 <template>
-    <div>
-        <button 
-            class="btn-del2" 
-            @click="deleteNote()"
-        >
-            <v-icon :class="isActive ? 'red' : 'default'">mdi-delete-forever</v-icon>
-        </button>
-    </div>
+    <button 
+        class="btn-del2" 
+        @click="deleteNote()"
+    >
+        <v-icon :class="isActive ? 'red' : 'default'">mdi-delete-forever</v-icon>
+    </button>
 </template>
 
 <script>
